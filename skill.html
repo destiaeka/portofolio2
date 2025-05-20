@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Skill - My Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    min-height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(102, 126, 234, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 35px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+
+  nav .brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1.2px;
+    color: #ffd166;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+
+  nav ul li {
+    margin-left: 30px;
+  }
+
+  nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+
+  nav ul li a:hover, nav ul li a:focus, nav ul li a.active {
+    background: #ffd166;
+    color: #5a3891;
+    outline: none;
+  }
+
+  /* Hamburger toggle button */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 28px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  .menu-toggle:focus {
+    outline: 2px solid #ffd166;
+  }
+
+  .menu-toggle span {
+    width: 28px;
+    height: 3px;
+    background: #ffd166;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Transform hamburger to X when active */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Container */
+  main {
+    flex-grow: 1;
+  }
+
+  .container {
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 100px auto 60px;
+    padding: 60px 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    position: relative;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 35px;
+    color: #ffd166;
+  }
+
+  ul.skill-list {
+    list-style: none;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  ul.skill-list li {
+    background: rgba(255, 209, 102, 0.2);
+    color: #5a3891;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 14px 20px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 12px rgba(255, 209, 102, 0.35);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ul.skill-list li:hover, ul.skill-list li:focus {
+    background: #ffd166;
+    color: #42266f;
+    outline: none;
+  }
+
+  .skill-list li.active {
+    background: #f0b429;
+    color: #42266f;
+    box-shadow: 0 8px 20px rgba(240, 180, 41, 0.7);
+  }
+
+  .skill-description {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease;
+    user-select: text;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(102, 126, 234, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    text-align: center;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+    color: #fff;
+  }
+
+  footer a {
+    margin: 0 15px;
+    display: inline-block;
+    color: #ffd166;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+  }
+
+  footer a:hover, footer a:focus {
+    color: #f0b429;
+    outline: none;
+  }
+
+  /* Simple icon style */
+  .icon {
+    vertical-align: middle;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav ul {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: rgba(102, 126, 234, 0.95);
+      backdrop-filter: blur(10px);
+      height: calc(100vh - 60px);
+      width: 220px;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+      border-radius: 0 0 0 15px;
+      z-index: 1000;
+    }
+
+    nav ul.open {
+      transform: translateX(0);
+    }
+
+    nav ul li {
+      margin: 20px 0;
+      width: 100%;
+    }
+
+    nav ul li a {
+      display: block;
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      margin: 90px 15px 60px;
+      padding: 50px 20px 40px;
+    }
+
+    nav {
+      padding: 12px 20px;
+    }
+
+    nav ul li {
+      margin-left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <nav role="navigation" aria-label="Primary Navigation">
+    <div class="brand">Destia Eka Rahmawati</div>
+    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="primary-menu">
+      <li><a href="index.html" tabindex="0">Home</a></li>
+      <li><a href="about.html" tabindex="0">About</a></li>
+      <li><a href="experience.html" tabindex="0">Experience</a></li>
+      <li><a href="skill.html" class="active" tabindex="0">Skill</a></li>
+      <li><a href="certificate.html" tabindex="0">Certificate</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="container" role="region" aria-labelledby="skill-heading">
+      <h2 id="skill-heading">My Skills</h2>
+      <ul class="skill-list" tabindex="0" role="listbox" aria-label="List of skills with descriptions" aria-activedescendant="">
+        <li id="skill-linux" tabindex="0" role="option" aria-selected="false" data-desc="Linux - Memiliki kemampuan dalam menggunakan sistem operasi Linux, mulai dari manajemen server, penulisan shell script, hingga administrasi sistem. Terbiasa bekerja di lingkungan command line dan melakukan otomasi tugas-tugas dasar administrasi.">Linux</li>
+        <li id="skill-container" tabindex="0" role="option" aria-selected="false" data-desc="Containerization - Memahami konsep dasar container seperti Docker dan Podman. Mampu membuat, mengelola, dan menjalankan container untuk menyederhanakan proses deployment aplikasi serta meningkatkan efisiensi sistem.">Containerization</li>
+        <li id="skill-web" tabindex="0" role="option" aria-selected="false" data-desc="Web Programming - Memahami dasar-dasar pengembangan web menggunakan HTML untuk struktur, CSS untuk desain tampilan, dan JavaScript untuk interaktivitas. Mampu membuat tampilan website yang responsif dan menarik secara fungsional.">Web Programming</li>
+        <li id="skill-aws" tabindex="0" role="option" aria-selected="false" data-desc="AWS - Memahami layanan dasar Amazon Web Services seperti EC2, S3, dan IAM. Mampu membuat instance virtual, mengelola penyimpanan cloud, serta memahami konsep dasar cloud computing dan keamanannya.">AWS</li>
+      </ul>
+      <div class="skill-description" id="skill-desc" tabindex="0" aria-live="polite" aria-atomic="true" hidden></div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <a href="https://instagram.com/destia.co.id" target="_blank" rel="noopener" aria-label="Instagram link" title="Instagram">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm6.5 1.5h-5a.75.75 0 000 1.5h5a.75.75 0 000-1.5zm-2.5 3a4 4 0 100 8 4 4 0 000-8zm5.125 9.625a.625.625 0 11-1.25 0 .625.625 0 011.25 0zM12 11a2 2 0 110 4 2 2 0 010-4z"/>
+      </svg>
+    </a>
+    <a href="https://wa.me/6285755617484" target="_blank" rel="noopener" aria-label="WhatsApp link" title="WhatsApp">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20.52 3.48a11.84 11.84 0 00-16.75 0A11.8 11.8 0 002 12a11.85 11.85 0 001.34 5.8L2 22l4.28-1.31A11.82 11.82 0 0012 24a11.8 11.8 0 008.52-20.52zM12 21a9 9 0 01-4.74-1.4l-.34-.2-2.55.77.87-2.47-.22-.4A9 9 0 1121 12a8.8 8.8 0 01-8.91 9zm4.92-6.46c-.24-.12-1.42-.7-1.64-.78-.22-.07-.38-.12-.54.12s-.62.78-.76.94c-.14.17-.28.19-.52.06a6.2 6.2 0 01-1.83-1.13 6.55 6.55 0 01-1.21-1.52c-.13-.22 0-.34.1-.46.05-.05.12-.13.18-.2a.52.52 0 00.07-.12.49.49 0 000-.42c-.07-.17-.54-1.31-.74-1.79s-.38-.42-.52-.43h-.44a.99.99 0 00-.71.34 3 3 0 00-.92 2.15c0 1 .56 1.97 1.06 2.67a6.31 6.31 0 002.82 2.79 7.08 7.08 0 002.3.85 3.17 3.17 0 002.58-.73 2.15 2.15 0 00.62-1.54c0-.13-.14-.22-.38-.34z"/>
+      </svg>
+    </a>
+    <a href="mailto:destiaeka38@gmail.com" aria-label="Email link" title="Email">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2 5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm2 0v.01L12 13l8-7.99V5H4zm0 2.99v11.01h16V7.99L12 15 4 7.99z"/>
+      </svg>
+    </a>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.getElementById('primary-menu');
+    const skills = document.querySelectorAll('.skill-list li');
+    const descBox = document.getElementById('skill-desc');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('open');
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.classList.remove('active');
+          navMenu.classList.remove('open');
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('open');
+      }
+    });
+
+    skills.forEach(skill => {
+      skill.addEventListener('click', () => {
+        const isActive = skill.classList.contains('active');
+        // Remove active class from all
+        skills.forEach(s => {
+          s.classList.remove('active');
+          s.setAttribute('aria-selected', 'false');
+        });
+
+        if (isActive) {
+          // If clicked again, hide description
+          descBox.textContent = '';
+          descBox.hidden = true;
+          skill.setAttribute('aria-selected', 'false');
+          descBox.setAttribute('aria-live', 'polite');
+          descBox.setAttribute('aria-atomic', 'true');
+          descBox.removeAttribute('aria-activedescendant');
+          return;
+        }
+
+        // Set clicked skill as active
+        skill.classList.add('active');
+        skill.setAttribute('aria-selected', 'true');
+        descBox.textContent = skill.getAttribute('data-desc');
+        descBox.hidden = false;
+        descBox.focus();
+        descBox.setAttribute('aria-activedescendant', skill.id);
+      });
+
+      skill.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          skill.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
